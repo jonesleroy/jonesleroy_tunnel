@@ -1,6 +1,18 @@
 /** Button that attempts to use the token in context when clicked */
+import { useAuth } from "./AuthContext";
+import Entrance from "./Entrance";
+import { useState } from "react";
+
 export default function Tablet() {
   // TODO: call authenticate when form is submitted
+
+  const { getUser, users, setLocation } = useAuth();
+  const tablet = () => {
+    getUser("https://fsa-jwt-practice.herokuapp.com/authenticate");
+    setLocation("TUNNEL");
+  };
+
+  console.log(users);
 
   return (
     <section>
@@ -16,7 +28,7 @@ export default function Tablet() {
       <p>
         It holds out a rectangular stone tablet carved with an intricate design.
       </p>
-      <form>
+      <form action={tablet}>
         <button>Place your palm upon the tablet.</button>
       </form>
     </section>

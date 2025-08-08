@@ -1,6 +1,17 @@
 /** Users can enter their name to receive a token from the API. */
+import { useAuth } from "./AuthContext";
+
 export default function Entrance() {
-  // TODO: call signup when form is submitted
+  const { newUser } = useAuth();
+
+  const createUser = (FormData) => {
+    const obj = {
+      username: FormData.get("username"),
+    };
+
+    newUser("https://fsa-jwt-practice.herokuapp.com/signup", obj);
+  };
+  // console.log(createUser);
 
   return (
     <>
@@ -15,12 +26,12 @@ export default function Entrance() {
         fixed on you. The one on the left opens its mouth, and with a deep,
         rumbling voice, it asks, "Who approaches? Speak your name."
       </p>
-      <form>
+      <form action={createUser}>
         <label>
           Name
           <input name="name" />
         </label>
-        <button>Respond</button>
+        <button type="submit">Respond</button>
       </form>
     </>
   );
